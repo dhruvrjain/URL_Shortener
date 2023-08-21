@@ -6,8 +6,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <title>URL Shotener</title>
+    <style>
+        .btn{
+            width: 150px;
+        }
+    </style>
 </head>
-<body class="p-3 mb-2 bg-dark text-white container">
+<body class="p-3 mb-2 bg-dark text-white container-sm">
     <form action="/url" method="post">
         <h1>URL Shotener</h1>
         <label for="long" class="form-label">Enter the URL to be shortened</label>
@@ -24,16 +29,16 @@
                 Short URL
             </th>
             <th>
-                Click
+                Clicks
             </th>
         </thead>
         <% urls.forEach(function(row){ %>
         <tr>
             <td>
-                <%= row.long %>
+                <a target="_blank" href= <%= row.long %> ><%= row.long %></a>
             </td>
             <td>
-                <a target="_blank" href= <%= row.short %> >Click me</a>
+                <button id='<%= row.short %>' class="btn btn-primary" onclick="copy('<%= row.short %>')">Copy Short Link</button>
             </td>
             <td>
                 <%= row.click %>
@@ -42,4 +47,17 @@
         <% }) %>
     </table>
 </body>
+<script>
+    function copy(s){
+        var serName=window.location.host+"/"+s;
+        var btn=document.getElementById(s);
+        btn.innerText="Copied to Clipboard";
+        btn.style.backgroundColor="green";
+        navigator.clipboard.writeText(serName);
+        setTimeout(function(){
+            btn.innerText="Copy Short Link";
+            btn.style.backgroundColor="#0D6EFD"
+        },5000)
+    }
+</script>
 </html>
