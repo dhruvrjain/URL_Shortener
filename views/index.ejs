@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <title>URL Shotener</title>
+</head>
+<body class="p-3 mb-2 bg-dark text-white container">
+    <form action="/url" method="post">
+        <h1>URL Shotener</h1>
+        <label for="long" class="form-label">Enter the URL to be shortened</label>
+        <input type="url" name="long" class="form-control bg-dark text-white" id="long" > <br>
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+    <br>
+    <table class="table table-dark table-striped">
+        <thead>
+            <th>
+                Long URL
+            </th>
+            <th>
+                Short URL
+            </th>
+            <th>
+                Click
+            </th>
+        </thead>
+        <% urls.forEach(function(row){ %>
+        <tr>
+            <td>
+                <%= row.long %>
+            </td>
+            <td>
+                <a target="_blank" href= <%= row.short %> >Click me</a>
+            </td>
+            <td>
+                <%= row.click %>
+            </td>
+        </tr>
+        <% }) %>
+    </table>
+</body>
+</html>
